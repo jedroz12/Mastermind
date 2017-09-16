@@ -1,2 +1,2 @@
 # Mastermind
-Mastermind, made in Windows Forms with C#. TODO: Instructions.
+Mastermind, made in Windows Forms with C#.
