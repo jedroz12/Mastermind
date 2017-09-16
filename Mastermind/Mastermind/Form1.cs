@@ -23,10 +23,10 @@ namespace Mastermind
         Pink    =   6
         */
 
-        //array for holding current boardstate
 
-        //boardstate at start (zeros are actually null panels, but this helps for visualization)
-        
+
+        //boardstate at start
+
         /*
         0 0 0 0
         0 0 0 0
@@ -40,6 +40,7 @@ namespace Mastermind
         0 0 0 0
         */
 
+        //array for holding current boardstate
         Panel[,] BoardState = new Panel[10, 4];
 
         //colours for panels to show user guesses
@@ -240,9 +241,12 @@ namespace Mastermind
                         break;
                 }
             }
-            if (HasDuplicates(solution))
+            if (NoDupes.Checked)
             {
-                GenerateSolution();
+                if (HasDuplicates(solution))
+                {
+                    GenerateSolution();
+                }
             }
         }
 
@@ -320,6 +324,9 @@ namespace Mastermind
 
         void CheckGuess()
         {
+            bool[] blackCheck = new bool[4];
+            bool[] whiteCheck = new bool[4];
+
             if (guess.SequenceEqual(solution))
             {
                 ShowSolution();
@@ -328,16 +335,28 @@ namespace Mastermind
 
             for (int i = 0; i < 4; i++)
             {
-
                 if (guess[i] == solution[i])
                 {
+                    if (whiteCheck[i]) continue;
+                    blackCheck[i] = true;
                     SideAnswerSquares[i + CurrentTurn * 4].BackColor = Red;
                 }
-                else if (solution.Contains(guess[i]))
+
+                if (guess.Contains(solution[i]))
+                {
+                    if (blackCheck[i]) continue;
+                    whiteCheck[i] = true;
+                    SideAnswerSquares[i + CurrentTurn * 4].BackColor = Black;
+                }
+                /*
+                if (solution.Contains(guess[i]))
                 {
                     SideAnswerSquares[i + CurrentTurn * 4].BackColor = Black;
                 }
+                */
+
             }
+
             if (CurrentTurn == 9)
             {
                 GuessButton.Visible = false;
