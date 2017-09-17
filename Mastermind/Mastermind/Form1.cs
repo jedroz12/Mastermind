@@ -289,37 +289,43 @@ namespace Mastermind
             guess[1] = UserColour2.Text;
             guess[2] = UserColour3.Text;
             guess[3] = UserColour4.Text;
-
-            CheckGuess();
-
-            //for each guess
-            for (int i = 0; i < 4; i++)
+            if (guess[0] == "" || guess[1] == "" || guess[2] == "" || guess[3] == "")
             {
-                //check what the user guessed; then set colour to guess
-                switch (guess[i])
-                {
-                    case "Red":
-                        BoardState[CurrentTurn, i].BackColor = Red;
-                        break;
-                    case "Blue":
-                        BoardState[CurrentTurn, i].BackColor = Blue;
-                        break;
-                    case "Yellow":
-                        BoardState[CurrentTurn, i].BackColor = Yellow;
-                        break;
-                    case "Purple":
-                        BoardState[CurrentTurn, i].BackColor = Purple;
-                        break;
-                    case "Green":
-                        BoardState[CurrentTurn, i].BackColor = Green;
-                        break;
-                    case "Pink":
-                        BoardState[CurrentTurn, i].BackColor = Pink;
-                        break;
-                }
+                MessageBox.Show("Please Enter A Guess!");
             }
-            //increase turn count
-            CurrentTurn++;            
+            else
+            {
+                CheckGuess();
+
+                //for each guess
+                for (int i = 0; i < 4; i++)
+                {
+                    //check what the user guessed; then set colour to guess
+                    switch (guess[i])
+                    {
+                        case "Red":
+                            BoardState[CurrentTurn, i].BackColor = Red;
+                            break;
+                        case "Blue":
+                            BoardState[CurrentTurn, i].BackColor = Blue;
+                            break;
+                        case "Yellow":
+                            BoardState[CurrentTurn, i].BackColor = Yellow;
+                            break;
+                        case "Purple":
+                            BoardState[CurrentTurn, i].BackColor = Purple;
+                            break;
+                        case "Green":
+                            BoardState[CurrentTurn, i].BackColor = Green;
+                            break;
+                        case "Pink":
+                            BoardState[CurrentTurn, i].BackColor = Pink;
+                            break;
+                    }
+                }
+                //increase turn count
+                CurrentTurn++;
+            }
         }
 
         void CheckGuess()
